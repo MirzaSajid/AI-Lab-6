@@ -1,0 +1,47 @@
+== Boundary tests ==
+PASS | empty text gives no windows
+PASS | empty text gives no sentence chunks
+PASS | document shorter than the budget gives one window (0, 10)
+PASS | document shorter than the budget gives one sentence chunk
+PASS | invalid size/overlap combinations raise ValueError
+PASS | sentence budget 0 raises ValueError
+PASS | a 95-word sentence falls back to 3 windows of [40, 40, 15] words
+PASS | chunk text equals source[start:end] for all three strategies
+
+== Corpus comparison (same 6 documents, same labelled evidence) ==
+documents: 6; original word units: 1175
+strategy | chunks | mean words | max words | emitted words | duplicated words | evidence clauses kept whole
+window-40, overlap 0 | 33 | 35.6 | 40 | 1175 | 0 | 2 of 5
+window-40, overlap 10 | 39 | 38.6 | 40 | 1505 | 330 | 5 of 5
+sentence-aware, budget 40 | 41 | 28.7 | 40 | 1175 | 0 | 5 of 5
+
+Evidence clause kept inside ONE chunk (True) or split (False)
+document | window-40, overlap 0 | window-40, overlap 10 | sentence-aware, budget 40
+late | False | True | True
+password | False | True | True
+assignment | True | True | True
+contractor | True | True | True
+printer | False | True | True
+
+Chunks per document
+document | words | window-40, overlap 0 | window-40, overlap 10 | sentence-aware, budget 40
+late | 210 | 6 | 7 | 7
+password | 202 | 6 | 7 | 7
+assignment | 205 | 6 | 7 | 7
+contractor | 186 | 5 | 6 | 6
+printer | 188 | 5 | 6 | 7
+staff_it | 184 | 5 | 6 | 7
+
+Sentences longer than the 40-word budget (use the fallback windows)
+late | [71]
+password | none
+assignment | [48]
+contractor | none
+printer | [42]
+staff_it | [41]
+
+== Where sentence splitting fails: abbreviations ==
+false cut after abbreviation at char 795: 'ne should contact the course coordinator, Dr.'
+false cut after abbreviation at char 828: 'Rana, as early as possible, e.g.'
+The splitter treats 'Dr.' and 'e.g.' as sentence ends, so one real sentence is cut into pieces.
+

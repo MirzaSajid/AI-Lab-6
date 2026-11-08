@@ -1,0 +1,31 @@
+FAQ assistant transcript (backend=tfidf)
+[exact FAQ answer]
+You: How do I reset my password?
+Bot: Use the recovery link on the login page. [source: it_help.txt]
+
+[exact FAQ answer (added FAQ)]
+You: How do I connect to the campus Wi-Fi?
+Bot: Select the campus network and sign in with your student ID. [source: it_help.txt]
+
+[paraphrase -> suggestions]
+You: password recovery
+Bot: Possible matches; choose or rephrase your question:
+How do I reset my password? (similarity 0.456)
+Where do I submit my assignment? (similarity 0.000)
+Can illness justify a late submission? (similarity 0.000)
+
+[paraphrase with little overlap]
+You: I forgot my login
+Bot: Possible matches; choose or rephrase your question:
+How do I reset my password? (similarity 0.414)
+Where do I submit my assignment? (similarity 0.141)
+Can illness justify a late submission? (similarity 0.000)
+
+[empty input]
+You: 
+Bot: Please enter a question.
+
+[unsupported input]
+You: volcano geology
+Bot: No matching FAQ. Please contact the help desk.
+

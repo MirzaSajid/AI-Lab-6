@@ -1,0 +1,10 @@
+document | words | marked synthetic | longest sentence (words)
+late | 210 | True | 71
+password | 202 | True | 33
+assignment | 205 | True | 48
+contractor | 186 | True | 29
+printer | 188 | True | 42
+staff_it | 184 | True | 41
+
+6 documents; 8 answerable queries (4 dev, 4 test); 2 unanswerable
+Dataset contract satisfied.

@@ -1,0 +1,8 @@
+Whitespace: ['I', "can't", 'submit', 'CS4944', 'late!'] 5
+Word-like: ['I', 'can', 't', 'submit', 'CS4944', 'late'] 6
+Original: I can't submit CS4944 late!
+
+Experiment: email, empty input and Urdu text
+'help@example.com' | whitespace: ['help@example.com'] 1 | word-like: ['help', 'example', 'com'] 3
+'' | whitespace: [] 0 | word-like: [] 0
+'یہ ایک مثال ہے' | whitespace: ['یہ', 'ایک', 'مثال', 'ہے'] 4 | word-like: ['یہ', 'ایک', 'مثال', 'ہے'] 4

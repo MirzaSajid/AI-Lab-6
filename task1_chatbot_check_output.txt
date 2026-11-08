@@ -1,0 +1,1 @@
+FAQ behaviour checks passed

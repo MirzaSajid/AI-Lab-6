@@ -1,0 +1,33 @@
+== Part A: wiring example from the manual ==
+source spans match the originals: True
+Backend: tfidf
+it:0 score=0.343
+A forgotten password can be reset using the recovery link.
+assessment:0 score=0.000
+Assignments are uploaded through the learning portal.
+Backend: embedding
+NOT RUN: ModuleNotFoundError: No module named 'sentence_transformers'
+
+== Part B: project corpus, sentence-aware chunks, 3 paraphrased queries ==
+--- backend: tfidf ---
+query: 'How can I recover my login access?' (expects password)
+  labelled evidence: 'Reset a forgotten password using the recovery link.'
+  1. assignment:0 score 0.117 chars 0-209 evidence-complete=False
+     'Coursework Submission Guide (synthetic teaching text). This guide explains how students hand in written work f'
+  2. password:2 score 0.099 chars 307-499 evidence-complete=False
+     'The recovery link is shown on the login page below the sign-in button and is sent to the personal email addres'
+query: 'How should I hand in my coursework?' (expects assignment)
+  labelled evidence: 'Upload assignments through the learning portal.'
+  1. assignment:0 score 0.356 chars 0-209 evidence-complete=True
+     'Coursework Submission Guide (synthetic teaching text). This guide explains how students hand in written work f'
+  2. late:4 score 0.089 chars 713-910 evidence-complete=False
+     'Students who expect to miss a deadline should contact the course coordinator, Dr. Rana, as early as possible,'
+query: 'What proof is needed when I was ill?' (expects late)
+  labelled evidence: 'Illness extensions require medical evidence before the deadline.'
+  1. contractor:4 score 0.211 chars 714-937 evidence-complete=False
+     'All remote workers must use the managed laptop supplied by the university and must connect through the approve'
+  2. password:2 score 0.164 chars 307-499 evidence-complete=False
+     'The recovery link is shown on the login page below the sign-in button and is sent to the personal email addres'
+
+--- backend: embedding ---
+NOT RUN: ModuleNotFoundError: No module named 'sentence_transformers'

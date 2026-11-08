@@ -1,0 +1,6 @@
+Guided query: illness medical evidence late submission
+assessment:late score=0.506
+Late submission is normally penalized. Students with illness may request an extension with medical evidence before the deadline.
+
+Experiment (TF-IDF): I was sick; can I hand it in tomorrow?
+No matching records.

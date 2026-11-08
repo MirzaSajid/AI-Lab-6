@@ -1,0 +1,15 @@
+Guided query with device filter printer: blank pages
+printer:blank score=0.278
+For blank printer pages: 1. Check ink level. 2. Run the printer cleaning utility. 3. Print a test page. Follow the device manual.
+
+Experiment: 'blank image' WITHOUT device metadata, top 2
+scanner:blank score=0.370
+For a blank scanner image, check document placement and select the correct scanning source.
+printer:blank score=0.093
+For blank printer pages: 1. Check ink level. 2. Run the printer cleaning utility. 3. Print a test page. Follow the device manual.
+
+Experiment: 'blank pages' WITHOUT device metadata, top 2
+printer:blank score=0.278
+For blank printer pages: 1. Check ink level. 2. Run the printer cleaning utility. 3. Print a test page. Follow the device manual.
+scanner:blank score=0.124
+For a blank scanner image, check document placement and select the correct scanning source.

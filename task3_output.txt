@@ -1,0 +1,179 @@
+corpus: 6 documents, 1175 word units
+queries: 10 (8 answerable: 4 dev + 4 test; 2 unanswerable)
+EMBEDDING METHOD NOT RUN: model unavailable (ModuleNotFoundError: No module named 'sentence_transformers')
+
+== Metrics (answerable queries only) ==
+strategy | method | split | queries | Hit@3 | MRR@3 | chunks | encode s | search s
+window-40, overlap 0 | tfidf | dev | 4 | 0.500 | 0.500 | 33 | 0.0088 | 0.000171
+window-40, overlap 0 | tfidf | test | 4 | 0.250 | 0.250 | 33 | 0.0088 | 0.000171
+window-40, overlap 10 | tfidf | dev | 4 | 1.000 | 0.750 | 39 | 0.0017 | 0.000107
+window-40, overlap 10 | tfidf | test | 4 | 0.500 | 0.500 | 39 | 0.0017 | 0.000107
+sentence-aware, budget 40 | tfidf | dev | 4 | 1.000 | 1.000 | 41 | 0.0016 | 0.000095
+sentence-aware, budget 40 | tfidf | test | 4 | 0.500 | 0.500 | 41 | 0.0016 | 0.000095
+embedding | NOT RUN for all strategies and splits (see the message above)
+
+== Selection on DEVELOPMENT queries only ==
+rule: highest dev MRR@3, then highest dev Hit@3, then fewest chunks, then strategy order 0, 10, sentence, then embedding before tfidf
+selected: strategy = sentence-aware, budget 40, method = tfidf (PROVISIONAL: lexical methods only; embedding not run)
+dev  : Hit@3 1.000, MRR@3 1.000 over 4 queries
+test : Hit@3 0.500, MRR@3 0.500 over 4 queries (scored once, no retuning)
+configurations tied with the selected one on dev MRR and Hit: 1 of 3
+With only 4 dev and 4 test answerable queries, differences of one query move a metric by 0.25 (Hit) or more; treat the ranking as weak evidence.
+
+== Metric arithmetic check on one top-3 list ==
+configuration: sentence-aware, budget 40 / tfidf; query: 'What is required for illness extensions?'
+  rank 1: late:1 score 0.387 relevant=True
+  rank 2: late:0 score 0.155 relevant=False
+  rank 3: late:6 score 0.153 relevant=False
+  reciprocal rank = 1/1 = 1.000
+
+== Top-3 results per query (text shortened to 70 characters; full text is in retrieval_log.csv) ==
+--- window-40, overlap 0 / tfidf ---
+query [dev, expects late]: What is required for illness extensions?
+  1. late:0 score 0.339 chars 0-274 [no] Assessment Policy: Late Work and Extensions (synthetic teaching [...]
+  2. late:4 score 0.168 chars 994-1232 [no] work follows the same rules, and each member must confirm the [...]
+  3. password:5 score 0.147 chars 1195-1203 [no] for one.
+query [dev, expects password]: How do I reset a forgotten password?
+  1. password:0 score 0.214 chars 0-259 [no] IT Help: Student Accounts and Passwords (synthetic teaching [...]
+  2. staff_it:0 score 0.192 chars 0-264 [no] IT Help: Staff Accounts (synthetic teaching text). Staff [...]
+  3. password:3 score 0.167 chars 726-940 [no] desk in Building B with a student card, where staff can verify [...]
+query [dev, expects assignment]: Where do I upload assignments?
+  1. assignment:0 score 0.200 chars 0-264 [REL] Coursework Submission Guide (synthetic teaching text). This [...]
+  2. password:3 score 0.105 chars 726-940 [no] desk in Building B with a student card, where staff can verify [...]
+  3. printer:3 score 0.053 chars 757-981 [no] up on the glass produces a white image. Never use compressed air [...]
+query [dev, expects contractor]: Can contractors work remotely?
+  1. contractor:1 score 0.490 chars 237-477 [REL] and the arrangement is reviewed every six months. Contractors [...]
+  2. contractor:0 score 0.210 chars 0-236 [no] Workplace Policy: Remote Work (synthetic teaching text). This [...]
+  3. password:3 score 0.068 chars 726-940 [no] desk in Building B with a student card, where staff can verify [...]
+query [test, expects printer]: What do I do for blank printer pages?
+  1. printer:1 score 0.235 chars 273-510 [no] printer pages, check ink levels and run the cleaning utility. [...]
+  2. printer:3 score 0.147 chars 757-981 [no] up on the glass produces a white image. Never use compressed air [...]
+  3. password:5 score 0.112 chars 1195-1203 [no] for one.
+query [test, expects password]: How can I recover my login access?
+  1. assignment:0 score 0.105 chars 0-264 [no] Coursework Submission Guide (synthetic teaching text). This [...]
+  2. password:0 score 0.092 chars 0-259 [no] IT Help: Student Accounts and Passwords (synthetic teaching [...]
+  3. staff_it:1 score 0.086 chars 265-504 [no] login page is disabled for staff accounts, so staff should not [...]
+query [test, expects assignment]: How should I hand in my coursework?
+  1. assignment:0 score 0.322 chars 0-264 [REL] Coursework Submission Guide (synthetic teaching text). This [...]
+  2. late:2 score 0.094 chars 513-758 [no] to the course coordinator, for example a long hospital stay, a [...]
+  3. staff_it:3 score 0.088 chars 732-965 [no] identity of the caller using two pieces of information held in [...]
+query [test, expects late]: What proof is needed when I was ill?
+  1. contractor:3 score 0.197 chars 718-982 [no] remote workers must use the managed laptop supplied by the [...]
+  2. password:1 score 0.138 chars 260-498 [no] the recovery link. Never share recovery codes. The recovery link [...]
+  3. staff_it:4 score 0.121 chars 966-1098 [no] be reported to the security team at once, together with the time [...]
+query [test, unanswerable]: What are tomorrow's flight prices?
+  1. contractor:0 score 0.152 chars 0-236 [-] Workplace Policy: Remote Work (synthetic teaching text). This [...]
+  2. assignment:2 score 0.115 chars 504-729 [-] with a warning message. Lab reports are different: submit lab [...]
+  3. staff_it:3 score 0.073 chars 732-965 [-] identity of the caller using two pieces of information held in [...]
+query [test, unanswerable]: Who won the football match?
+  1. late:2 score 0.231 chars 513-758 [-] to the course coordinator, for example a long hospital stay, a [...]
+  2. staff_it:2 score 0.183 chars 505-731 [-] service desk unlocks it, which normally takes less than an hour [...]
+  3. contractor:0 score 0.173 chars 0-236 [-] Workplace Policy: Remote Work (synthetic teaching text). This [...]
+--- window-40, overlap 10 / tfidf ---
+query [dev, expects late]: What is required for illness extensions?
+  1. late:0 score 0.303 chars 0-274 [no] Assessment Policy: Late Work and Extensions (synthetic teaching [...]
+  2. late:1 score 0.271 chars 197-449 [REL] is normally penalized. Illness extensions require medical [...]
+  3. contractor:0 score 0.139 chars 0-236 [no] Workplace Policy: Remote Work (synthetic teaching text). This [...]
+query [dev, expects password]: How do I reset a forgotten password?
+  1. password:0 score 0.200 chars 0-259 [no] IT Help: Student Accounts and Passwords (synthetic teaching [...]
+  2. password:1 score 0.188 chars 194-427 [REL] portal and the wireless network. Reset a forgotten password [...]
+  3. staff_it:0 score 0.181 chars 0-264 [no] IT Help: Staff Accounts (synthetic teaching text). Staff [...]
+query [dev, expects assignment]: Where do I upload assignments?
+  1. assignment:0 score 0.215 chars 0-264 [REL] Coursework Submission Guide (synthetic teaching text). This [...]
+  2. password:3 score 0.095 chars 557-777 [no] three failed attempts the account is locked for one hour to [...]
+  3. password:4 score 0.094 chars 726-940 [no] desk in Building B with a student card, where staff can verify [...]
+query [dev, expects contractor]: Can contractors work remotely?
+  1. contractor:1 score 0.411 chars 181-428 [REL] days each week with the approval of their line manager, and the [...]
+  2. contractor:2 score 0.222 chars 366-598 [no] rules do not apply to contractors. A contractor whose contract [...]
+  3. contractor:0 score 0.219 chars 0-236 [no] Workplace Policy: Remote Work (synthetic teaching text). This [...]
+query [test, expects printer]: What do I do for blank printer pages?
+  1. printer:1 score 0.349 chars 218-453 [REL] fuser unit can stay hot for several minutes. For blank printer [...]
+  2. printer:4 score 0.142 chars 757-981 [no] up on the glass produces a white image. Never use compressed air [...]
+  3. assignment:6 score 0.108 chars 1078-1219 [no] every submitted file until the final marks have been published. [...]
+query [test, expects password]: How can I recover my login access?
+  1. assignment:0 score 0.109 chars 0-264 [no] Coursework Submission Guide (synthetic teaching text). This [...]
+  2. password:0 score 0.098 chars 0-259 [no] IT Help: Student Accounts and Passwords (synthetic teaching [...]
+  3. staff_it:1 score 0.098 chars 203-443 [no] in person with photo identification. The recovery link on the [...]
+query [test, expects assignment]: How should I hand in my coursework?
+  1. assignment:0 score 0.330 chars 0-264 [REL] Coursework Submission Guide (synthetic teaching text). This [...]
+  2. late:3 score 0.077 chars 574-822 [no] a bereavement in the immediate family, or a documented technical [...]
+  3. staff_it:4 score 0.077 chars 732-965 [no] identity of the caller using two pieces of information held in [...]
+query [test, expects late]: What proof is needed when I was ill?
+  1. contractor:4 score 0.215 chars 718-982 [no] remote workers must use the managed laptop supplied by the [...]
+  2. password:2 score 0.134 chars 377-613 [no] and is sent to the personal email address that was registered at [...]
+  3. password:1 score 0.128 chars 194-427 [no] portal and the wireless network. Reset a forgotten password [...]
+query [test, unanswerable]: What are tomorrow's flight prices?
+  1. contractor:0 score 0.159 chars 0-236 [-] Workplace Policy: Remote Work (synthetic teaching text). This [...]
+  2. late:6 score 0.089 chars 1114-1283 [-] the request and do not move the dates of other assessments. [...]
+  3. staff_it:4 score 0.075 chars 732-965 [-] identity of the caller using two pieces of information held in [...]
+query [test, unanswerable]: Who won the football match?
+  1. late:3 score 0.222 chars 574-822 [-] a bereavement in the immediate family, or a documented technical [...]
+  2. staff_it:3 score 0.215 chars 564-791 [-] hour on weekdays. Staff who work off campus may ask the service [...]
+  3. staff_it:2 score 0.186 chars 380-615 [-] sixteen characters and must be changed every ninety days. After [...]
+--- sentence-aware, budget 40 / tfidf ---
+query [dev, expects late]: What is required for illness extensions?
+  1. late:1 score 0.387 chars 220-285 [REL] Illness extensions require medical evidence before the deadline.
+  2. late:0 score 0.155 chars 0-220 [no] Assessment Policy: Late Work and Extensions (synthetic teaching [...]
+  3. late:6 score 0.153 chars 1065-1283 [no] Extensions apply only to the assignment named in the request and [...]
+query [dev, expects password]: How do I reset a forgotten password?
+  1. password:1 score 0.369 chars 227-307 [REL] Reset a forgotten password using the recovery link. Never share [...]
+  2. staff_it:0 score 0.200 chars 0-240 [no] IT Help: Staff Accounts (synthetic teaching text). Staff [...]
+  3. password:5 score 0.180 chars 822-1022 [no] The service desk will not tell anyone a password, and it will [...]
+query [dev, expects assignment]: Where do I upload assignments?
+  1. assignment:0 score 0.223 chars 0-209 [REL] Coursework Submission Guide (synthetic teaching text). This [...]
+  2. password:4 score 0.117 chars 643-822 [no] If the personal address is no longer available, a student may [...]
+  3. contractor:2 score 0.062 chars 357-540 [no] Employee rules do not apply to contractors. A contractor whose [...]
+query [dev, expects contractor]: Can contractors work remotely?
+  1. contractor:1 score 0.486 chars 139-357 [REL] Employees may work remotely for up to two days each week with [...]
+  2. contractor:2 score 0.204 chars 357-540 [no] Employee rules do not apply to contractors. A contractor whose [...]
+  3. contractor:0 score 0.109 chars 0-139 [no] Workplace Policy: Remote Work (synthetic teaching text). This [...]
+query [test, expects printer]: What do I do for blank printer pages?
+  1. printer:1 score 0.316 chars 263-365 [REL] For blank printer pages, check ink levels and run the cleaning [...]
+  2. printer:5 score 0.152 chars 797-1017 [no] Never use compressed air inside the printer, and do not touch [...]
+  3. printer:2 score 0.118 chars 365-589 [no] If the pages are still blank after two cleaning cycles, replace [...]
+query [test, expects password]: How can I recover my login access?
+  1. assignment:0 score 0.117 chars 0-209 [no] Coursework Submission Guide (synthetic teaching text). This [...]
+  2. password:2 score 0.099 chars 307-499 [no] The recovery link is shown on the login page below the sign-in [...]
+  3. password:0 score 0.097 chars 0-227 [no] IT Help: Student Accounts and Passwords (synthetic teaching [...]
+query [test, expects assignment]: How should I hand in my coursework?
+  1. assignment:0 score 0.356 chars 0-209 [REL] Coursework Submission Guide (synthetic teaching text). This [...]
+  2. late:4 score 0.089 chars 713-910 [no] Students who expect to miss a deadline should contact the course [...]
+  3. contractor:3 score 0.077 chars 540-714 [no] Managers should not promise remote work to a contractor by email [...]
+query [test, expects late]: What proof is needed when I was ill?
+  1. contractor:4 score 0.211 chars 714-937 [no] All remote workers must use the managed laptop supplied by the [...]
+  2. password:2 score 0.164 chars 307-499 [no] The recovery link is shown on the login page below the sign-in [...]
+  3. contractor:0 score 0.143 chars 0-139 [no] Workplace Policy: Remote Work (synthetic teaching text). This [...]
+query [test, unanswerable]: What are tomorrow's flight prices?
+  1. contractor:0 score 0.206 chars 0-139 [-] Workplace Policy: Remote Work (synthetic teaching text). This [...]
+  2. assignment:3 score 0.122 chars 528-730 [-] Lab reports are different: submit lab reports by email to the [...]
+  3. staff_it:5 score 0.102 chars 817-939 [-] Shared accounts are not allowed, and a password must never be [...]
+query [test, unanswerable]: Who won the football match?
+  1. staff_it:3 score 0.231 chars 582-808 [-] Staff who work off campus may ask the service desk to arrange a [...]
+  2. late:4 score 0.225 chars 713-910 [-] Students who expect to miss a deadline should contact the course [...]
+  3. contractor:0 score 0.219 chars 0-139 [-] Workplace Policy: Remote Work (synthetic teaching text). This [...]
+
+== Failures: answerable queries whose first relevant chunk is not rank 1 ==
+strategy | method | split | query | expected doc | first relevant rank | top-1 chunk | top-1 score
+window-40, overlap 0 | tfidf | dev | What is required for illness extensions? | late | none in top 3 | late:0 | 0.339
+window-40, overlap 0 | tfidf | dev | How do I reset a forgotten password? | password | none in top 3 | password:0 | 0.214
+window-40, overlap 0 | tfidf | test | What do I do for blank printer pages? | printer | none in top 3 | printer:1 | 0.235
+window-40, overlap 0 | tfidf | test | How can I recover my login access? | password | none in top 3 | assignment:0 | 0.105
+window-40, overlap 0 | tfidf | test | What proof is needed when I was ill? | late | none in top 3 | contractor:3 | 0.197
+window-40, overlap 10 | tfidf | dev | What is required for illness extensions? | late | 2 | late:0 | 0.303
+window-40, overlap 10 | tfidf | dev | How do I reset a forgotten password? | password | 2 | password:0 | 0.200
+window-40, overlap 10 | tfidf | test | How can I recover my login access? | password | none in top 3 | assignment:0 | 0.109
+window-40, overlap 10 | tfidf | test | What proof is needed when I was ill? | late | none in top 3 | contractor:4 | 0.215
+sentence-aware, budget 40 | tfidf | test | How can I recover my login access? | password | none in top 3 | assignment:0 | 0.117
+sentence-aware, budget 40 | tfidf | test | What proof is needed when I was ill? | late | none in top 3 | contractor:4 | 0.211
+
+== Unanswerable queries: the highest score still returns text ==
+strategy | method | query | top-1 chunk | top-1 score
+window-40, overlap 0 | tfidf | What are tomorrow's flight prices? | contractor:0 | 0.152
+window-40, overlap 0 | tfidf | Who won the football match? | late:2 | 0.231
+window-40, overlap 10 | tfidf | What are tomorrow's flight prices? | contractor:0 | 0.159
+window-40, overlap 10 | tfidf | Who won the football match? | late:3 | 0.222
+sentence-aware, budget 40 | tfidf | What are tomorrow's flight prices? | contractor:0 | 0.206
+sentence-aware, budget 40 | tfidf | Who won the football match? | staff_it:3 | 0.231
+Ranking always returns the best-scoring chunks; a score measures similarity, not whether the corpus can answer the question. No rejection threshold was calibrated: the development split contains no unanswerable query, so a threshold could not be calibrated on separate development examples.
+
+wrote retrieval_log.csv (90 rows) and outputs/task3_metrics.json

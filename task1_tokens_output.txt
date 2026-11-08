@@ -1,0 +1,52 @@
+== Token comparison on 10 inputs ==
+(model subwords are shown only for the first two English examples)
+
+1. punctuation
+   original  : 'AI, search!'
+   whitespace: ['AI,', 'search!'] count 2
+   word-like : ['AI', 'search'] count 2
+   model subwords: NOT AVAILABLE here (ModuleNotFoundError: No module named 'sentence_transformers')
+2. contraction (straight apostrophe)
+   original  : "I can't log in."
+   whitespace: ['I', "can't", 'log', 'in.'] count 4
+   word-like : ['I', 'can', 't', 'log', 'in'] count 5
+   model subwords: NOT AVAILABLE here (ModuleNotFoundError: No module named 'sentence_transformers')
+3. contraction (curly apostrophe)
+   original  : 'I can’t log in.'
+   whitespace: ['I', 'can’t', 'log', 'in.'] count 4
+   word-like : ['I', 'can', 't', 'log', 'in'] count 5
+4. email address
+   original  : 'help@example.com'
+   whitespace: ['help@example.com'] count 1
+   word-like : ['help', 'example', 'com'] count 3
+5. course code
+   original  : 'CS4944'
+   whitespace: ['CS4944'] count 1
+   word-like : ['CS4944'] count 1
+6. identifier with digits first
+   original  : '2.1 version 4944CS '
+   whitespace: ['2.1', 'version', '4944CS'] count 3
+   word-like : ['2', '1', 'version', '4944CS'] count 4
+7. empty string
+   original  : ''
+   whitespace: [] count 0
+   word-like : [] count 0
+8. Urdu text
+   original  : 'یہ ایک مثال ہے'
+   whitespace: ['یہ', 'ایک', 'مثال', 'ہے'] count 4
+   word-like : ['یہ', 'ایک', 'مثال', 'ہے'] count 4
+9. Urdu text with full stop
+   original  : 'یہ ایک مثال ہے۔'
+   whitespace: ['یہ', 'ایک', 'مثال', 'ہے۔'] count 4
+   word-like : ['یہ', 'ایک', 'مثال', 'ہے'] count 4
+10. URL
+   original  : 'See https://example.com/help?id=42'
+   whitespace: ['See', 'https://example.com/help?id=42'] count 2
+   word-like : ['See', 'https', 'example', 'com', 'help', 'id', '42'] count 7
+
+== Normalization risk: a search copy can change the meaning ==
+original   : 'I do not need a password reset'
+search copy: ['need', 'password', 'reset'] (lowercase, punctuation dropped, stop words removed)
+original   : "I can't submit CS4944 late!"
+search copy: ['t', 'submit', 'cs4944', 'late'] (lowercase, punctuation dropped, stop words removed)
+Lowercasing also merges identifiers that differ only in case: False -> True

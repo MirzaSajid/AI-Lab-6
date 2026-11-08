@@ -1,0 +1,256 @@
+{
+  "model": {
+    "name": "sentence-transformers/all-MiniLM-L6-v2",
+    "available": false,
+    "load_seconds": null,
+    "error": "ModuleNotFoundError: No module named 'sentence_transformers'",
+    "max_seq_length": null
+  },
+  "token_audit": {},
+  "results": [
+    {
+      "strategy": "0",
+      "method": "tfidf",
+      "split": "dev",
+      "n_answerable": 4,
+      "hit": 0.5,
+      "mrr": 0.5,
+      "chunks": 33,
+      "encode_seconds": 0.00876691900000992,
+      "search_seconds": 0.0001708750000091186
+    },
+    {
+      "strategy": "0",
+      "method": "tfidf",
+      "split": "test",
+      "n_answerable": 4,
+      "hit": 0.25,
+      "mrr": 0.25,
+      "chunks": 33,
+      "encode_seconds": 0.00876691900000992,
+      "search_seconds": 0.0001708750000091186
+    },
+    {
+      "strategy": "10",
+      "method": "tfidf",
+      "split": "dev",
+      "n_answerable": 4,
+      "hit": 1.0,
+      "mrr": 0.75,
+      "chunks": 39,
+      "encode_seconds": 0.00173870199998305,
+      "search_seconds": 0.00010676400000875219
+    },
+    {
+      "strategy": "10",
+      "method": "tfidf",
+      "split": "test",
+      "n_answerable": 4,
+      "hit": 0.5,
+      "mrr": 0.5,
+      "chunks": 39,
+      "encode_seconds": 0.00173870199998305,
+      "search_seconds": 0.00010676400000875219
+    },
+    {
+      "strategy": "sentence",
+      "method": "tfidf",
+      "split": "dev",
+      "n_answerable": 4,
+      "hit": 1.0,
+      "mrr": 1.0,
+      "chunks": 41,
+      "encode_seconds": 0.0015617970000221248,
+      "search_seconds": 9.487599999147278e-05
+    },
+    {
+      "strategy": "sentence",
+      "method": "tfidf",
+      "split": "test",
+      "n_answerable": 4,
+      "hit": 0.5,
+      "mrr": 0.5,
+      "chunks": 41,
+      "encode_seconds": 0.0015617970000221248,
+      "search_seconds": 9.487599999147278e-05
+    }
+  ],
+  "failures": [
+    {
+      "strategy": "0",
+      "method": "tfidf",
+      "query": "What is required for illness extensions?",
+      "split": "dev",
+      "expected_doc": "late",
+      "first_relevant_rank": null,
+      "top1_chunk": "late:0",
+      "top1_doc": "late",
+      "top1_score": 0.3387901147206796
+    },
+    {
+      "strategy": "0",
+      "method": "tfidf",
+      "query": "How do I reset a forgotten password?",
+      "split": "dev",
+      "expected_doc": "password",
+      "first_relevant_rank": null,
+      "top1_chunk": "password:0",
+      "top1_doc": "password",
+      "top1_score": 0.21409850352036025
+    },
+    {
+      "strategy": "0",
+      "method": "tfidf",
+      "query": "What do I do for blank printer pages?",
+      "split": "test",
+      "expected_doc": "printer",
+      "first_relevant_rank": null,
+      "top1_chunk": "printer:1",
+      "top1_doc": "printer",
+      "top1_score": 0.23488890890625108
+    },
+    {
+      "strategy": "0",
+      "method": "tfidf",
+      "query": "How can I recover my login access?",
+      "split": "test",
+      "expected_doc": "password",
+      "first_relevant_rank": null,
+      "top1_chunk": "assignment:0",
+      "top1_doc": "assignment",
+      "top1_score": 0.10505668374530243
+    },
+    {
+      "strategy": "0",
+      "method": "tfidf",
+      "query": "What proof is needed when I was ill?",
+      "split": "test",
+      "expected_doc": "late",
+      "first_relevant_rank": null,
+      "top1_chunk": "contractor:3",
+      "top1_doc": "contractor",
+      "top1_score": 0.196809765636755
+    },
+    {
+      "strategy": "10",
+      "method": "tfidf",
+      "query": "What is required for illness extensions?",
+      "split": "dev",
+      "expected_doc": "late",
+      "first_relevant_rank": 2,
+      "top1_chunk": "late:0",
+      "top1_doc": "late",
+      "top1_score": 0.302865045732992
+    },
+    {
+      "strategy": "10",
+      "method": "tfidf",
+      "query": "How do I reset a forgotten password?",
+      "split": "dev",
+      "expected_doc": "password",
+      "first_relevant_rank": 2,
+      "top1_chunk": "password:0",
+      "top1_doc": "password",
+      "top1_score": 0.19977533442202206
+    },
+    {
+      "strategy": "10",
+      "method": "tfidf",
+      "query": "How can I recover my login access?",
+      "split": "test",
+      "expected_doc": "password",
+      "first_relevant_rank": null,
+      "top1_chunk": "assignment:0",
+      "top1_doc": "assignment",
+      "top1_score": 0.10945105628078354
+    },
+    {
+      "strategy": "10",
+      "method": "tfidf",
+      "query": "What proof is needed when I was ill?",
+      "split": "test",
+      "expected_doc": "late",
+      "first_relevant_rank": null,
+      "top1_chunk": "contractor:4",
+      "top1_doc": "contractor",
+      "top1_score": 0.21501082142899308
+    },
+    {
+      "strategy": "sentence",
+      "method": "tfidf",
+      "query": "How can I recover my login access?",
+      "split": "test",
+      "expected_doc": "password",
+      "first_relevant_rank": null,
+      "top1_chunk": "assignment:0",
+      "top1_doc": "assignment",
+      "top1_score": 0.1166184117317416
+    },
+    {
+      "strategy": "sentence",
+      "method": "tfidf",
+      "query": "What proof is needed when I was ill?",
+      "split": "test",
+      "expected_doc": "late",
+      "first_relevant_rank": null,
+      "top1_chunk": "contractor:4",
+      "top1_doc": "contractor",
+      "top1_score": 0.21079513420764487
+    }
+  ],
+  "unanswerable": [
+    {
+      "strategy": "0",
+      "method": "tfidf",
+      "query": "What are tomorrow's flight prices?",
+      "top1_chunk": "contractor:0",
+      "top1_doc": "contractor",
+      "top1_score": 0.15157039551195267
+    },
+    {
+      "strategy": "0",
+      "method": "tfidf",
+      "query": "Who won the football match?",
+      "top1_chunk": "late:2",
+      "top1_doc": "late",
+      "top1_score": 0.2312770174819688
+    },
+    {
+      "strategy": "10",
+      "method": "tfidf",
+      "query": "What are tomorrow's flight prices?",
+      "top1_chunk": "contractor:0",
+      "top1_doc": "contractor",
+      "top1_score": 0.15898489722770173
+    },
+    {
+      "strategy": "10",
+      "method": "tfidf",
+      "query": "Who won the football match?",
+      "top1_chunk": "late:3",
+      "top1_doc": "late",
+      "top1_score": 0.22170401147720825
+    },
+    {
+      "strategy": "sentence",
+      "method": "tfidf",
+      "query": "What are tomorrow's flight prices?",
+      "top1_chunk": "contractor:0",
+      "top1_doc": "contractor",
+      "top1_score": 0.2063023144011236
+    },
+    {
+      "strategy": "sentence",
+      "method": "tfidf",
+      "query": "Who won the football match?",
+      "top1_chunk": "staff_it:3",
+      "top1_doc": "staff_it",
+      "top1_score": 0.23092976184886832
+    }
+  ],
+  "selected": {
+    "strategy": "sentence",
+    "method": "tfidf",
+    "provisional": true
+  }
+}

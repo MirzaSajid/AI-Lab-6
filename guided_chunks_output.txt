@@ -1,0 +1,10 @@
+word windows
+0 73 'Late work is penalized. Illness may qualify for an extension when medical'
+48 122 'an extension when medical evidence is provided. Ask the coordinator first.'
+sentence aware
+0 24 'Late work is penalized. '
+24 96 'Illness may qualify for an extension when medical evidence is provided. '
+96 122 'Ask the coordinator first.'
+
+Experiment: 20-word budget
+0 122 'Late work is penalized. Illness may qualify for an extension when medical evidence is provided. Ask the coordinator first.'

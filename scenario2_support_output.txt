@@ -1,0 +1,13 @@
+Guided query with region filter PK: damaged parcel photographs
+returns:damage score=0.373
+For a damaged parcel, contact support within 48 hours and attach photographs of the item and packaging.
+
+Experiment: same query WITHOUT the region filter, top 2
+returns:damage score=0.373
+For a damaged parcel, contact support within 48 hours and attach photographs of the item and packaging.
+returns:damage:other score=0.252
+Damaged parcel reports in the other region have a 72 hour window.
+
+Experiment (TF-IDF): My parcel arrived broken
+returns:damage:other score=0.244
+Damaged parcel reports in the other region have a 72 hour window.

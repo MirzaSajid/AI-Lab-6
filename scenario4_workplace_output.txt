@@ -1,0 +1,9 @@
+Guided query with audience filter contractor: remote work
+remote:contractor score=0.435
+Contractors may work remotely only when the signed contract explicitly permits remote work.
+
+Experiment: same query WITHOUT the filter, top 2
+remote:contractor score=0.435
+Contractors may work remotely only when the signed contract explicitly permits remote work.
+remote:staff score=0.394
+Employees may request remote work with manager approval.

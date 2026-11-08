@@ -1,0 +1,29 @@
+Evidence assistant (strategy=sentence, backend=tfidf). Type exit to stop.
+Question: What is required for illness extensions?
+Candidate evidence; relevance must be checked:
+1 late:1 0.387 characters 220 285
+2 late:0 0.155 characters 0 220
+3 late:6 0.153 characters 1065 1283
+Choose 1-3 to inspect; Enter if none apply: 1
+Retrieved passage: Illness extensions require medical evidence before the deadline. 
+Source: late characters 220 285
+This is retrieved text to inspect, not a verified answer.
+Question: 
+No candidate evidence; rephrase or contact a human.
+Question: What are tomorrow's flight prices?
+Candidate evidence; relevance must be checked:
+1 contractor:0 0.206 characters 0 139
+2 assignment:3 0.122 characters 528 730
+3 staff_it:5 0.102 characters 817 939
+Choose 1-3 to inspect; Enter if none apply: 
+No answer selected. Rephrase or contact a human.
+Question: How can I recover my login access?
+Candidate evidence; relevance must be checked:
+1 assignment:0 0.117 characters 0 209
+2 password:2 0.099 characters 307 499
+3 password:0 0.097 characters 0 227
+Choose 1-3 to inspect; Enter if none apply: 2
+Retrieved passage: The recovery link is shown on the login page below the sign-in button and is sent to the personal email address that was registered at enrolment, so students should keep that address current. 
+Source: password characters 307 499
+This is retrieved text to inspect, not a verified answer.
+Question: exit
